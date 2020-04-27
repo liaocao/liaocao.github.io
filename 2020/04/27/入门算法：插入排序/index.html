@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>入门算法：插入排序 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上手难度：★☆算法复杂度：O(n^2)，但在数组近乎有序的情况下，插入排序的性能相对比较高，甚至比O(nlogn)还要高 排序思想：两层循环第一层循环从1到arr.length，前闭后开最开始记录arr[i]的值为temp，也就是红色标记块然后再以i为最大值进行倒序遍历将temp与arr[j-1]进行比较不断往前挪动，挪动条件是小于前面的值，直到挪到挪不动的位置，就将temp放到这个位置 代码实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门算法：插入排序">
+<meta property="og:url" content="http://yoursite.com/2020/04/27/%E5%85%A5%E9%97%A8%E7%AE%97%E6%B3%95%EF%BC%9A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上手难度：★☆算法复杂度：O(n^2)，但在数组近乎有序的情况下，插入排序的性能相对比较高，甚至比O(nlogn)还要高 排序思想：两层循环第一层循环从1到arr.length，前闭后开最开始记录arr[i]的值为temp，也就是红色标记块然后再以i为最大值进行倒序遍历将temp与arr[j-1]进行比较不断往前挪动，挪动条件是小于前面的值，直到挪到挪不动的位置，就将temp放到这个位置 代码实现">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10295200-bd9d2e7b4daccef2.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10295200-74a6c7669d8aee2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-04-27T14:18:49.124Z">
+<meta property="article:modified_time" content="2020-04-27T14:18:27.422Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/10295200-bd9d2e7b4daccef2.gif?imageMogr2/auto-orient/strip">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-入门算法：插入排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/27/%E5%85%A5%E9%97%A8%E7%AE%97%E6%B3%95%EF%BC%9A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-04-27T14:18:49.124Z" itemprop="datePublished">2020-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      入门算法：插入排序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="上手难度：★☆"><a href="#上手难度：★☆" class="headerlink" title="上手难度：★☆"></a>上手难度：★☆</h4><h4 id="算法复杂度：O-n-2-，但在数组近乎有序的情况下，插入排序的性能相对比较高，甚至比O-nlogn-还要高"><a href="#算法复杂度：O-n-2-，但在数组近乎有序的情况下，插入排序的性能相对比较高，甚至比O-nlogn-还要高" class="headerlink" title="算法复杂度：O(n^2)，但在数组近乎有序的情况下，插入排序的性能相对比较高，甚至比O(nlogn)还要高"></a>算法复杂度：O(n^2)，但在数组近乎有序的情况下，插入排序的性能相对比较高，甚至比O(nlogn)还要高</h4><p><img src="https://upload-images.jianshu.io/upload_images/10295200-bd9d2e7b4daccef2.gif?imageMogr2/auto-orient/strip" alt="insertionSort.gif"></p>
+<p>排序思想：<br>两层循环<br>第一层循环从1到arr.length，前闭后开<br>最开始记录arr[i]的值为temp，也就是红色标记块<br>然后再以i为最大值进行倒序遍历<br>将temp与arr[j-1]进行比较不断往前挪动，挪动条件是小于前面的值，直到挪到挪不动的位置，就将temp放到这个位置</p>
+<p>代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class InsertSort &#123;</span><br><span class="line"></span><br><span class="line">    public static void insertSort(int[] arr) &#123;</span><br><span class="line">        for(int i &#x3D; 1; i &lt; arr.length; i++)&#123;</span><br><span class="line">            int temp &#x3D; arr[i];&#x2F;&#x2F;使用temp记录i对应位置的值</span><br><span class="line">            int j;</span><br><span class="line"></span><br><span class="line">            for(j &#x3D; i; j &gt; 0 &amp;&amp; temp &lt; arr[j - 1]; j--)&#123;&#x2F;&#x2F;每次与j前面的数进行比较，如果小于前面的值，就让arr[j]等于前一位的值，由于temp记录了arr[i]，最开始的j等于i，因此起初的值不会丢失</span><br><span class="line">                arr[j] &#x3D; arr[j - 1];&#x2F;&#x2F;接收前一个元素的值</span><br><span class="line">            &#125;&#x2F;&#x2F;从逻辑上来说，这里是将temp的值在小于arr[j-1]时，往前挪动</span><br><span class="line">            </span><br><span class="line">            arr[j] &#x3D; temp;&#x2F;&#x2F;到这一步，j自减到了temp&gt;arr[j-1]的位置，由于j的值在循环过程中已经被j+1接收了，因此让arr[j] &#x3D; temp就完成了交换</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] arr &#x3D; &#123;3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48&#125;;</span><br><span class="line"></span><br><span class="line">        insertSort(arr);</span><br><span class="line"></span><br><span class="line">        for( int i &#x3D; 0 ; i &lt; arr.length ; i ++ )&#123;</span><br><span class="line">            System.out.print(arr[i]);</span><br><span class="line">            System.out.print(&#39; &#39;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果<br><img src="https://upload-images.jianshu.io/upload_images/10295200-74a6c7669d8aee2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="排序结果"></p>
+<p>优点：<br>第二层循环由于是从i开始进行倒序循环，循环不用每次都完整循环，提高了效率，在面对一个近乎有序数组时，内层循环甚至只需要循环一次就能完成，例如 1 2 3 4这种，内层循环只需要循环一次即可，算法复杂度最高效的时候接近O(n)。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/27/%E5%85%A5%E9%97%A8%E7%AE%97%E6%B3%95%EF%BC%9A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="ck9ikic0d00038wv1hp9fdi96" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/27/%E5%85%A5%E9%97%A8%E7%AE%97%E6%B3%95%EF%BC%9A%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          入门算法：选择排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">我的第一篇博客文章</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/27/%E5%85%A5%E9%97%A8%E7%AE%97%E6%B3%95%EF%BC%9A%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">入门算法：选择排序</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/27/%E5%85%A5%E9%97%A8%E7%AE%97%E6%B3%95%EF%BC%9A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">入门算法：插入排序</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/27/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
